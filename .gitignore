@@ -1,0 +1,4 @@
+personal.md
+.vvenv/*
+*_home*/
+*.lock
