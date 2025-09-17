@@ -2,3 +2,6 @@ personal.md
 .vvenv/*
 *_home*/
 *.lock
+.venv/
+*.DS_Store
+mnist/
