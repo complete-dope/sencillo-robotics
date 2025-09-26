@@ -36,11 +36,39 @@ paper link : https://arxiv.org/pdf/2504.05299
 
 
 ## Flow matching 
+> TODO : Why to use diffusion or flow matching to generation action tokens ? 
 
 
 
-## VLA model (SmolVLA) / ( lerobot )
+## SmolVLA model 
 
 Here the input is the (text/ language instructions + images + action state) to the the VLM model (discarding the last L-N layers ) , the model on top adds a head to find the relevant action for these images so the input is the observation and output is the action state and this happens. Action expert, takes in merged token embedding consist of alternating cross attention layers and self attention layers and this outputs a chunk of low level actions using flow matching .. 
+
+
+## OpenVLA model 
+
+Here also we use VLM and all the innovation is in using the action tokenizer model, the LLM is finetuned to perform a different task that is to output action tokens( the VLM is trained to output action tokens) these action token ids are passed as input to the action tokenizer. 
+
+So the delta is learning the action expert / tokenizer and improving the model / paper ! 
+The moat is in the way of how we learn / modify the action states !
+
+## Pi0 fast model 
+
+Action tokenizer, to normalise action to -1 to 1, then uses Discrete cosine transform (DCT) per dimension to convert time domain action chunks into freq. domain. Removes insignificant freq. coefficients then applies BPE to map discrete token vocab. 
+
+Refer to this colab notebook for more xplanation : 
+https://colab.research.google.com/drive/1DPoaogAInKA9b5rxCiZoB1BC-fJ1rI-U?usp=sharing 
+
+So, the current MOAT in late 2025 for robo companies is the Action tokenizer 
+
+
+## FAST action tokenizer 
+This uses DCT to compress, https://www.physicalintelligence.company/research/fast 
+
+
+## JPEG transformation 
+
+https://www.youtube.com/watch?v=Kv1Hiv3ox8I
+
 
 
