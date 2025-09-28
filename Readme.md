@@ -64,11 +64,36 @@ So, the current MOAT in late 2025 for robo companies is the Action tokenizer
 
 ## FAST action tokenizer 
 This uses DCT to compress, https://www.physicalintelligence.company/research/fast 
+then quantises 
+
+but its still much slower than the flow matching approach 
 
 
-## JPEG transformation 
+## DCT for signal compression 
 
 https://www.youtube.com/watch?v=Kv1Hiv3ox8I
 
+Here’s the live DCT-based compression of your signal:
 
+Original signal:
+[10, 12, 15, 20, 18, 16, 14, 12, 11, 13, 17, 19, 21, 20, 18, 15]
+
+DCT coefficients:
+[62.75, -5.88, 2.24, -2.76, -11.29, 0.33, -1.10, 0.30, 0.25, 1.72, 0.67, -0.16, -0.47, -0.41, -1.25, -0.14]
+
+Compressed coefficients (keeping top 30% energy):
+[62.75, -5.88, 2.24, -2.76, -11.29, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+
+Reconstructed signal:
+[9.78, 12.21, 15.73, 18.38, 18.76, 16.76, 13.65, 11.30, 11.14, 13.35, 16.78, 19.68, 20.68, 19.58, 17.43, 15.78]
+
+Compression ratio:
+3.2x (original 16 non-zero coefficients → 5 stored coefficients)
+
+The signal is approximated well with only a fraction of the coefficients.
+
+then Quantize to integers and then make use BPE to club tokens ( byte pair encoding )
+
+
+Training fast but the inference is Slow
 
