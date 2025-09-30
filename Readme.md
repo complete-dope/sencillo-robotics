@@ -8,9 +8,9 @@ Start with the basics:
 [✔️] ViT models  
 [✔️] CLIP model   
 [✔️] SigLIP model  
-[] Pixel Shuffle  
-[] VLM model (SmolVLM papers)  
-[] VLA model   
+[✔️] Pixel Shuffle  
+[✔️] VLM model (SmolVLM papers)  
+[✔️] VLA model   
 
 
 
@@ -19,8 +19,13 @@ Transformers backbone with patches embedding with positional embedding , a featu
 
 
 ## CLIP : 
-Trained on Image-caption pairs (Image - Caption (IMG, Caption)), so the text encoder and the image encoder , so we can get an idea of text just by looking at the iamge embeddings so its learned image features, with additional text feature extractor ( matcher ) ! 
+Trained on Image-caption pairs (Image - Caption (IMG, Caption)), so the text encoder and the image encoder , so we can get an idea of text just by looking at the image embeddings so its learned image features, with additional text feature extractor ( matcher ) ! 
 
+What is this used for ? 
+1. Image classier ( text = 'This is an image of a --object-- ' and if the similarity score is higher)
+This tells the similarity between the image and the text pair , so it learned a joint embedding for text and image modality
+2. Image search ( red color ferrari ) aka indexing over all your images
+3. Embeddings are generalises well across domain specific fine-tuning 
 
 ## Pixel shuffling 
 
@@ -33,6 +38,10 @@ This also helps to reduce the no. of visual tokens , required / compresses the v
 Here we input both the images along with the text question that we have so it requires an extractor that is trained on both the images and as well as text and learned joined embedding , so here we have to use the VLM model 
 paper link : https://arxiv.org/pdf/2504.05299 
 
+
+Here we use a trained image encoder from CLIP but the text encoder is not from the CLIP model ... why ??
+> Using the trained Image encoder, they get benefit from pretrained encoder so we need to only train the projection layer 
+> For text encoder, they use an LLM as they are better in representing the text
 
 
 ## Flow matching 
